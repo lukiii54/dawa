@@ -1,0 +1,75 @@
+{% include '/layout/header.html.twig' %}
+<script type="application/javascript">
+    window.onload=function() {
+        const f = document.getElementById("chooseRace");
+
+        f.addEventListener("click", function (event) {
+            let cont = document.getElementById("infoRace");
+            {% for race in listerace %}
+                if("{{ race.name }}" === f.value) {
+                    let informationRace = document.getElementById("infoRace")
+                    informationRace.className = "card horizontal";
+                    informationRace.innerHTML ="<img style=\"width: 256px\" src=\"{{ race.path }}\" alt=\"Un héros\"><h3>{{ race.name }}</h3><p>{{ race.description }}</p><li>attaque : {{ race.attack }}</li><li>défense : {{ race.defense }}</li><li>agilité : {{ race.agility }}</li><li>vie : {{ race.hp }}</li>";
+                }
+            {% endfor %}
+        });
+    }
+</script>
+<div class="container" style="padding-top: 3%">
+    <h2 class="white-text center-align"> Création des Héros</h2>
+    <div class="row">
+        <form class="col s12" action="valCreateHero" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="name" type="text" name="name" class="green-text validate">
+                    <label class="green-text" for="name">Nom</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="firstname" type="text" name="firstname" class="green-text validate">
+                    <label class="green-text" for="firstname">Prénom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="selects-container">
+                    <select id="chooseElem" name="namelem">
+                        {% for elem in element %}
+                            <option>{{ elem.name }}</option>
+                        {% endfor %}
+                    </select>
+                        <label class="green-text" for="element">Choisissez un élément</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row valign-wrapper">
+                <div class="col s12">
+                    <label class="green-text" for="element">Choisissez une race</label>
+                    <select id="chooseRace" name="namerace">
+                        {% for race in listerace %}
+                            <option value="{{ race.name }}">{{ race.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+            </div>
+
+            <div class="card horizontal col s12" id="infoRace">
+
+            </div>
+            <div class="row"><label class="green-text" for="img">Choissiez une URL d'image pour votre monstre</label></div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2500000">
+                    <input id="img" type="file" name="img" class="green-text validate" size="50">
+                </div>
+            </div>
+            <button class="green btn waves-effect waves-light" type="submit" name="action">Valider
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+
+{% include '/layout/footer.html.twig' %}

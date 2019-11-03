@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% block head %}
+    <!-- <link rel="stylesheet" href="style.css" />!-->
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../../public/assets/css/main.css">
+    {% endblock %}
+
+    <title>{% block title %}{% endblock %} - DAWA: Dark Age - Wanted Artefact</title>
+{% endblock %}
+</head>
+<script>
+    function post(path, params, method='post') {
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = path;
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+                form.appendChild(hiddenField);
+            }
+        }
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+<style>
+    html, body {
+        height : 100%;
+    }
+</style>
+<body>
+{% include '/layout/navigation.twig' %}
+<div class="container">
+    {% include '/layout/flash.twig' %}
+    <div id="content">{% block content %}{% endblock %}</div>
+</div>
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../public/assets/materialize/js/bin/materialize.min.js"></script>
+{% endblock %}
+
+</body>

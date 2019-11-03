@@ -1,0 +1,68 @@
+{% include '/layout/header.html.twig' %}
+
+
+
+
+<div class="container" style="padding-top: 3%">
+    <h2 class="white-text center-align"> Modification du perso {{ hero.hero.firstname}} {{ hero.charac.name}} </h2>
+    <div class="row">
+        <form class="col s12" action="{{ path_for('modif.hero')}}" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="name" type="text" name="name" class="green-text validate" value= {{hero.charac.name}}>
+                    <input id="name" type="hidden" name="id_hero" class="green-text validate" value= {{hero.hero.id_hero}}> 
+                    <label class="green-text" for="name">Nom</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="firstname" type="text" name="firstname" class="green-text validate" value= {{ hero.hero.firstname}}>
+                    <label class="green-text" for="firstname">Prénom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <div class="selects-container">
+                        <label class="green-text" for="elem">L'élement du Héro</label>
+                        <select id="name" name="elem" >
+                            <option selected="selected">{{hero.elem.name}}</option>
+                            {% for elem in listeElem %}
+                                <option>{{ elem.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="input-field col s6">
+                    <div class="selects-container">
+                        <label class="green-text" for="elem">Race du Héro</label>
+                        <select id="firstname" name="race" >
+                            <option selected="selected">{{hero.race.name}}</option>
+                            {% for race in listeRace %}
+                                <option>{{ race.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <label class="title">Image actuelle du hero</label>
+            <div class="row">
+                <img style="width: 256px" src="{{ hero.hero.path }}"
+                     alt="0">
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="2500000">
+                    <input id="img" type="file" name="img" class="green-text validate" size="50">
+                </div>
+            </div>
+
+            
+
+            <button class="green btn waves-effect waves-light" type="submit">Valider
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+
+{% include '/layout/footer.html.twig' %}
